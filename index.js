@@ -1,6 +1,3 @@
-
-
-
 var region = {
 	"type": "Polygon",
 	"coordinates": [
@@ -33,7 +30,10 @@ var start_date = new Date();
 start_date.setMonth(start_date.getMonth() - 4);
 var end_date = new Date();
 
-var assets_url = "http://api.farmshots.com/imagery/catalogs?bounds=" + JSON.stringify(region) + "&page=0";
+function photo_url(asset_id) { return "http://image.farmshots.com/imagery/tile?asset_id=" + asset_id + "&min_map=20&max_map=100&ul_lat=35.56239491058853&ul_lon=-90.2471923828125&lr_lat=35.42486791930558&lr_lon=-90.087890625&x_dim=1024&y_dim=1024&exprs=[%22%20b4%20%22,%20%22b3%20%22,%20%22b2%20%22]&lossless=true&access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1dWlkIjoiM2UxZmJhYTgtNzc0Mi00Njg1LTgzNGUtZTYxM2NiYjBlOGI4IiwiaWF0IjoxNDQ4MTQ1MzU2fQ.lmlXIRtIXeshZIb6ZuLrq7a6hnGgEgnbcELA21zIg5StzXj9dmg802Uls67hpT9FTPPpM1GJfpwczGDhZN2L0EXu9Tc-UiN0MYgMhV0wry_lSZgZdZZbWH68mWQAYL1FtajDaGDdk-CQHzRiAzXZIESvfazqLu92qqFL5URINr8"; }
+
+var assets_url = "http://api.farmshots.com/imagery/catalogs?bounds=" + JSON.stringify(region) + "&cloud_cover=10&source=landsat8&page=0";
+
 function imagery_url(asset_id) { return 'http://image.farmshots.com/imagery/tile/{x}/{y}/{z}?min_map=20&max_map=80&exprs=["b4", "b3", "b2"]&lossless=false&access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1dWlkIjoiM2UxZmJhYTgtNzc0Mi00Njg1LTgzNGUtZTYxM2NiYjBlOGI4IiwiaWF0IjoxNDQ4MTQ1MzU2fQ.lmlXIRtIXeshZIb6ZuLrq7a6hnGgEgnbcELA21zIg5StzXj9dmg802Uls67hpT9FTPPpM1GJfpwczGDhZN2L0EXu9Tc-UiN0MYgMhV0wry_lSZgZdZZbWH68mWQAYL1FtajDaGDdk-CQHzRiAzXZIESvfazqLu92qqFL5URINr8&asset_id=' + asset_id; }
 
 $(document).ready(load_data);
@@ -44,8 +44,8 @@ function load_data() {
 		type:"GET",
 		dataType:"json",
 		success: function(data){
-		//	$("#toggle_pics")
-			load_maps(data);
+			load_pics(data)
+			load_maps(data[1]["asset_id"]);
 		},
 		error: function(err){
 			console.log(err);
@@ -53,7 +53,26 @@ function load_data() {
 	});
 }
 
-function load_maps(data) {
+var id = 0;
+function load_pics(data) {
+	$("#toggle_pics").on('click', function() {
+		$("#toggle_pics > span").toggle();
+		$("#map, #images").toggle(); 
+	});
+
+	$("#images img").each(function(i, elem) {
+		elem.src = photo_url(data[i]["asset_id"]);
+	})
+
+	window.setInterval(function() {
+		console.log("called @" + id);
+		$("#images img").hide();
+		$("#images img:nth-child(" + (id+1) + ")").show();
+		id = (id + 1) % 5;
+	}, 2000);
+}
+
+function load_maps(asset_id) {
 	var map = new ol.Map({
 		target: 'map',
 		view: new ol.View({
@@ -66,7 +85,7 @@ function load_maps(data) {
 	// Farmshots sat layer
 	var farmshots_satellite = new ol.layer.Tile({
 		source: new ol.source.XYZ({
-			url: imagery_url(data[1]["asset_id"])
+			url: imagery_url(asset_id)
 		}),
 		opacity: 1
 	});
@@ -117,5 +136,5 @@ function load_maps(data) {
 		} else {
 			map.removeLayer(l.layer);
 		}
-	})
+	});
 }
