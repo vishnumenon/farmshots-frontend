@@ -3,16 +3,35 @@
 <head>
 	<meta charset="utf-8">
 	<title>Farmshots Frontend Task</title>
+	<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css"> 	
+	<link rel="stylesheet" type="text/css" href="http://openlayers.org/en/v3.12.1/css/ol.css">
 	<link rel="stylesheet" href="index.css">
 	<!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.min.js"></script>
-    <script src="http://openlayers.org/api/OpenLayers.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <script src="http://openlayers.org/en/v3.12.1/build/ol.js"></script>
 </head>
 
 <body id="home">
       <div id="map"></div>
+      <div id="images"></div>
+      <div id="controls" class="card-panel">
+      <h5> Layers </h5>
+      <form id="toggles">
+      	<input type="checkbox" name="layers" value="satellite" id="satellite"checked /><label for="satellite">Satellite </label>
+      	<br />
+      	<input type="checkbox" name="layers" value="wind" id="wind" checked /><label for="wind">Wind </label>
+      	<br />
+      	<input type="checkbox" name="layers" value="rainfall" id="rainfall"checked /><label for="rainfall">Rainfall </label>
+      	<br />
+      	<input type="checkbox" name="layers" value="temperature" id="temperature"checked /><label for="temperature">Temperature </label>
+      </form>
+      <br />
+      <a href="#" class="waves-effect waves-light btn" id="toggle_pics">Image View</a>
+      </div>
       <script src="index.js"></script>
 </body>
 </html>
