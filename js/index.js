@@ -77,7 +77,7 @@ function load_maps(asset_id) {
 			projection: 'EPSG:4326'
 		})
 	});
-	
+
 	// Farmshots sat layer
 	var farmshots_satellite = new ol.layer.Tile({
 		source: new ol.source.XYZ({
@@ -86,29 +86,29 @@ function load_maps(asset_id) {
 		opacity: 1
 	});
 
-    //OWM temperature layer
-    var temperature = new ol.layer.Tile({
-    	source: new ol.source.XYZ({
-    		url: 'http://maps.owm.io:8091/57312b2a4ccf430100c37025/{z}/{x}/{y}?hash=b64f691acf2b690e7a52263e20d698f4'
-    	}),
-    	opacity: .3
-    });
+	//OWM temperature layer
+	var temperature = new ol.layer.Tile({
+		source: new ol.source.XYZ({
+			url: 'http://maps.owm.io:8091/57312b2a4ccf430100c37025/{z}/{x}/{y}?hash=b64f691acf2b690e7a52263e20d698f4'
+		}),
+		opacity: .3
+	});
 
-    //OWM wind layer
-    var wind = new ol.layer.Tile({
-    	source: new ol.source.XYZ({
-    		url: 'http://maps.owm.io:8091/57312e6f4ccf430100c37026/{z}/{x}/{y}?hash=b64f691acf2b690e7a52263e20d698f4'
-    	}),
-    	opacity: .3
-    });    
+	//OWM wind layer
+	var wind = new ol.layer.Tile({
+		source: new ol.source.XYZ({
+			url: 'http://maps.owm.io:8091/57312e6f4ccf430100c37026/{z}/{x}/{y}?hash=b64f691acf2b690e7a52263e20d698f4'
+		}),
+		opacity: .3
+	});    
 
-    //OWM rainfall layer
-    var rainfall = new ol.layer.Tile({
-    	source: new ol.source.XYZ({
-    		url: 'http://maps.owm.io:8091/573130e64ccf430100c37028/{z}/{x}/{y}?hash=b64f691acf2b690e7a52263e20d698f4',
-    	}),
-    	opacity: .3
-    })
+	//OWM rainfall layer
+	var rainfall = new ol.layer.Tile({
+		source: new ol.source.XYZ({
+			url: 'http://maps.owm.io:8091/573130e64ccf430100c37028/{z}/{x}/{y}?hash=b64f691acf2b690e7a52263e20d698f4',
+		}),
+		opacity: .3
+	})
 
 	//add all the layers
 	map.addLayer(farmshots_satellite);
