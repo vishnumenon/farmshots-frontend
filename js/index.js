@@ -24,11 +24,7 @@ var region = {
 	]
 	]
 	]
-}; 
-
-var start_date = new Date();
-start_date.setMonth(start_date.getMonth() - 4);
-var end_date = new Date();
+};
 
 function photo_url(asset_id) { return "http://image.farmshots.com/imagery/tile?asset_id=" + asset_id + "&min_map=20&max_map=100&ul_lat=35.56239491058853&ul_lon=-90.2471923828125&lr_lat=35.42486791930558&lr_lon=-90.087890625&x_dim=1024&y_dim=1024&exprs=[%22%20b4%20%22,%20%22b3%20%22,%20%22b2%20%22]&lossless=true&access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1dWlkIjoiM2UxZmJhYTgtNzc0Mi00Njg1LTgzNGUtZTYxM2NiYjBlOGI4IiwiaWF0IjoxNDQ4MTQ1MzU2fQ.lmlXIRtIXeshZIb6ZuLrq7a6hnGgEgnbcELA21zIg5StzXj9dmg802Uls67hpT9FTPPpM1GJfpwczGDhZN2L0EXu9Tc-UiN0MYgMhV0wry_lSZgZdZZbWH68mWQAYL1FtajDaGDdk-CQHzRiAzXZIESvfazqLu92qqFL5URINr8"; }
 
